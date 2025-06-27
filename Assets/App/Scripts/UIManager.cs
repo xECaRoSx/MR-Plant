@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using TMPro;
 using Unity.VisualScripting;
 using System.Collections;
+using System;
 
 public class UIManager : MonoBehaviour
 {
@@ -14,19 +15,19 @@ public class UIManager : MonoBehaviour
     public GameObject selectionUI;
     public GameObject informationUI;
 
-    [Header("Animal Selection Panel")]
-    public GameObject animalTooltip; // Tooltip for animal name
-    public TextMeshProUGUI tooltipText; // Tooltip text for animal name
+    [Header("Plant Selection Panel")]
+    public GameObject plantTooltip; // Tooltip for plant name
+    public TextMeshProUGUI tooltipText; // Tooltip text for plant name
 
-    [Header("Animal Information Panel")]
-    public TextMeshProUGUI animalNameText;
+    [Header("Plant Information Panel")]
+    public TextMeshProUGUI plantNameText;
     public TextMeshProUGUI scientificNameText;
     public TextMeshProUGUI familyText;
     public GameObject[] conservationIcons; // Conservation status icons
     [Range(20, 40)]
-    public int maxNameLength = 31; // Max length animal name -> New line if too long
+    public int maxNameLength = 31; // Max length plant name -> New line if too long
 
-    private AnimalController currentAnimal;
+    private PlantController currentPlant;
     
     private void Awake()
     {
@@ -67,42 +68,38 @@ public class UIManager : MonoBehaviour
     // ==================== Button Functions: UI Actions ====================
     public void AnimationButton(int actionIndex)
     {
-        if (currentAnimal != null) currentAnimal.PlayAnimation(actionIndex);
+        if (currentPlant != null) currentPlant.PlayAnimation(actionIndex);
     }
 
     public void ReturnButton()
     {
-        if (currentAnimal != null)
+        if (currentPlant != null)
         {
-            Debug.Log($"Current Animal: {currentAnimal}");
-            currentAnimal.OnDeselect(); // Deselect the current animal
-            currentAnimal = null;
+            Debug.Log($"Current Plant: {currentPlant}");
+            currentPlant.OnDeselect(); // Deselect the current plant
+            currentPlant = null;
         }
     }
-    // =========================== Animal Tooltip ===========================
-    public void ShowAnimalTooltip(AnimalData data, AnimalController animal)
+    // =========================== Plant Tooltip ===========================
+    public void ShowPlantTooltip(PlantData data, PlantController plant)
     {
-        currentAnimal = animal;
-        Debug.Log($"Current Animal: {currentAnimal}");
-        animalTooltip.SetActive(true); // Show tooltip
+        currentPlant = plant;
+        Debug.Log($"Current Plant: {currentPlant}");
+        plantTooltip.SetActive(true); // Show tooltip
 
-        if ((data.thaiName.Length + data.animalName.Length) <= maxNameLength)
-            tooltipText.text = $"{data.thaiName} ({data.animalName})";
+        if ((data.thaiName.Length + data.scientificName.Length) <= maxNameLength)
+            tooltipText.text = $"{data.thaiName} ({data.scientificName})";
         else
-            tooltipText.text = $"{data.thaiName}\n({data.animalName})";
+            tooltipText.text = $"{data.thaiName}\n({data.scientificName})";
     }
 
-    // ========================= Animal Information =========================
-    public void ShowAnimalInfo(AnimalData data, AnimalController animal)
+    // ========================= Plant Information =========================
+    public void ShowPlantInfo(PlantData data, PlantController plant)
     {
-        currentAnimal = animal;
-        animalTooltip.SetActive(false); // Hide tooltip
+        currentPlant = plant;
+        plantTooltip.SetActive(false); // Hide tooltip
 
-        if ((data.thaiName.Length + data.animalName.Length) <= maxNameLength)
-            animalNameText.text = $"{data.thaiName} ({data.animalName})";
-        else
-            animalNameText.text = $"{data.thaiName}\n({data.animalName})";
-
+        plantNameText.text = data.thaiName;
         scientificNameText.text = $"<i>{data.scientificName}</i>";
         familyText.text = data.family;
 

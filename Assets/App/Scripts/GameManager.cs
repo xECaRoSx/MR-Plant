@@ -6,8 +6,8 @@ public enum GameState
 {
     TitleScreenState,
     AnchoringState,
-    AnimalSelectionState,
-    AnimalInfoState,
+    PlantSelectionState,
+    PlantInfoState,
 }
 
 public class GameManager : MonoBehaviour
@@ -33,7 +33,7 @@ public class GameManager : MonoBehaviour
         if (!skipAnchoring)
             SetState(GameState.TitleScreenState);
         else
-            SetState(GameState.AnimalSelectionState);
+            SetState(GameState.PlantSelectionState);
     }
 
     // =================== Button Functions: State Change ===================
@@ -41,8 +41,8 @@ public class GameManager : MonoBehaviour
     {
         if (skipAnchoring)
         {
-            SetState(GameState.AnimalSelectionState);
-            Debug.Log("Skipping Anchoring, starting game directly in Animal Selection");
+            SetState(GameState.PlantSelectionState);
+            Debug.Log("Skipping Anchoring, starting game directly in Plant Selection");
         }
         else
         {
@@ -52,13 +52,13 @@ public class GameManager : MonoBehaviour
     }
     public void ConfirmAnchor()
     {
-        SetState(GameState.AnimalSelectionState);
+        SetState(GameState.PlantSelectionState);
         Debug.Log("Anchor Confirmed");
     }
     public void ReturnToSelection()
     {
-        SetState(GameState.AnimalSelectionState);
-        Debug.Log("Returning to Animal Selection");
+        SetState(GameState.PlantSelectionState);
+        Debug.Log("Returning to Plant Selection");
     }
     public void ReturnToTitle()
     {
@@ -85,16 +85,16 @@ public class GameManager : MonoBehaviour
         {
             case GameState.TitleScreenState:
                 UIManager.Instance.ShowTitleScreen();
-                AnimalManager.Instance.HideAllAnimals();
+                PlantManager.Instance.HideAllPlants();
                 break;
             case GameState.AnchoringState:
                 UIManager.Instance.ShowAnchoringScreen();
                 break;
-            case GameState.AnimalSelectionState:
+            case GameState.PlantSelectionState:
                 UIManager.Instance.ShowSelectionScreen();
-                AnimalManager.Instance.ShowAllAnimals();
+                PlantManager.Instance.ShowAllPlants();
                 break;
-            case GameState.AnimalInfoState:
+            case GameState.PlantInfoState:
                 UIManager.Instance.ShowInformationScreen();
                 break;
             default:
