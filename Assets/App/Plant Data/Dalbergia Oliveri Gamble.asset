@@ -17,6 +17,7 @@ MonoBehaviour:
   family: Fabaceae-Papilionioideae
   conservationStatus: 4
   plantPrefab: {fileID: 0}
-  idleAnimation: {fileID: 0}
-  animationList: []
-  plantSound: {fileID: 0}
+  idleAnimation: {fileID: 7400000, guid: 9c257d9426dd8744791173ad113d29e7, type: 2}
+  animationList:
+  - {fileID: 0}
+  plantSound: {fileID: 8300000, guid: a418a2417f8aeb24cb71085138b29e22, type: 3}

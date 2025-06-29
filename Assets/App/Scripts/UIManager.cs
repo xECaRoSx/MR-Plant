@@ -86,11 +86,7 @@ public class UIManager : MonoBehaviour
         currentPlant = plant;
         Debug.Log($"Current Plant: {currentPlant}");
         plantTooltip.SetActive(true); // Show tooltip
-
-        if ((data.thaiName.Length + data.scientificName.Length) <= maxNameLength)
-            tooltipText.text = $"{data.thaiName} ({data.scientificName})";
-        else
-            tooltipText.text = $"{data.thaiName}\n({data.scientificName})";
+        tooltipText.text = data.thaiName;
     }
 
     // ========================= Plant Information =========================

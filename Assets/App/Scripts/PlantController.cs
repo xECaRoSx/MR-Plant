@@ -105,7 +105,7 @@ public class PlantController : MonoBehaviour
         overrideController[stateName] = targetClip;
         Debug.Log($"[Override] {stateName} clip set for {plantData.scientificName}: {targetClip.name}");
         animator.Play(stateName);
-        AudioManager.Instance.PlaySFX(plantData.plantSound);
+        //AudioManager.Instance.PlaySFX(plantData.plantSound);
 
         Debug.Log($"[PlantController] Playing {plantData.scientificName} : {stateName}");
     }

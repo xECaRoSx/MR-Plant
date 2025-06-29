@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 7050a666d8f2cd043aeaab60e80d00b0
+guid: cfa095aa8eb07ce4ebedb4618b1046a1
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -7,22 +7,22 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: flower
+      name: flower.002
     second: {fileID: 2100000, guid: fa273f09eb14e7246af0f7e77476ec49, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: fruit
+      name: fruit.002
     second: {fileID: 2100000, guid: 975eaab743d602a449dd780e931628b7, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: leaf
+      name: leaf.002
     second: {fileID: 2100000, guid: cb1f68421425cf84bb0139c0f1ad1dc6, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: trunk
+      name: trunk.002
     second: {fileID: 2100000, guid: 5d98e85fa67d6444893b8d60866a00c7, type: 2}
   materials:
     materialImportMode: 2
