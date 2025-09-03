@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Dalbergia Lanceolaria
   m_EditorClassIdentifier: 
   thaiName: "\u0E09\u0E19\u0E27\u0E19"
-  scientificName: Dalbergia lanceolaria L.f. subsp. paniculata (Roxb.) Thoth.
+  scientificName: Dalbergia lanceolaria subsp. paniculata (Roxb.) Thoth.
   family: Fabaceae-Papilionioideae
   conservationStatus: 0
   plantPrefab: {fileID: 0}
