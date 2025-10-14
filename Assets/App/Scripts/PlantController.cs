@@ -108,6 +108,7 @@ public class PlantController : MonoBehaviour
         //AudioManager.Instance.PlaySFX(plantData.plantSound);
 
         Debug.Log($"[PlantController] Playing {plantData.scientificName} : {stateName}");
+        VFXManager.Instance.PlayVFX(VFXTriggerType.OnPlayAnimation);
     }
 
     public void StopAnimation()

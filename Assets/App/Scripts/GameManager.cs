@@ -93,9 +93,11 @@ public class GameManager : MonoBehaviour
             case GameState.PlantSelectionState:
                 UIManager.Instance.ShowSelectionScreen();
                 PlantManager.Instance.ShowAllPlants();
+                VFXManager.Instance.StopAllVFX();
                 break;
             case GameState.PlantInfoState:
                 UIManager.Instance.ShowInformationScreen();
+                VFXManager.Instance.PlayVFX(VFXTriggerType.OnEnterInfoState);
                 break;
             default:
                 Debug.LogWarning("Unhandled game state: " + newState);
