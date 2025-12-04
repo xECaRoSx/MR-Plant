@@ -15,8 +15,14 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
     public GameState CurrentState { get; private set; }
 
+    public EnableSeeThrough enableSeeThrough;
+
+    public GameObject anchorRoot;
+
     [Header("Test Settings")]
-    [SerializeField] private bool skipAnchoring = false; // For testing purposes
+    [SerializeField] private bool skipAnchoring = false;
+
+    private bool hasPlayedSelectionVO = false;
 
     private void Awake()
     {
@@ -50,8 +56,9 @@ public class GameManager : MonoBehaviour
             Debug.Log("Starting...");
         }
     }
-    public void ConfirmAnchor()
+    public void ConfirmButton()
     {
+        AnchorManager.Instance.ConfirmAnchor();
         SetState(GameState.PlantSelectionState);
         Debug.Log("Anchor Confirmed");
     }
@@ -86,14 +93,25 @@ public class GameManager : MonoBehaviour
             case GameState.TitleScreenState:
                 UIManager.Instance.ShowTitleScreen();
                 PlantManager.Instance.HideAllPlants();
+                anchorRoot.SetActive(false);
                 break;
             case GameState.AnchoringState:
                 UIManager.Instance.ShowAnchoringScreen();
+                AudioManager.Instance.PlayVObyID("VO1");
+                AnchorManager.Instance.EnablePreview(true);
+                enableSeeThrough.SeeThroughOn();
                 break;
             case GameState.PlantSelectionState:
                 UIManager.Instance.ShowSelectionScreen();
                 PlantManager.Instance.ShowAllPlants();
                 VFXManager.Instance.StopAllVFX();
+
+                if (!hasPlayedSelectionVO)
+                {
+                    AudioManager.Instance.PlayVObyID("VO2");
+                    hasPlayedSelectionVO = true;
+                    Debug.Log("[GameManager] Playing first-time Selection VO");
+                }
                 break;
             case GameState.PlantInfoState:
                 UIManager.Instance.ShowInformationScreen();
