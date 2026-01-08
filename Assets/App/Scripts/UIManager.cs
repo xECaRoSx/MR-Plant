@@ -1,9 +1,5 @@
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
-using Unity.VisualScripting;
-using System.Collections;
-using System;
 
 public class UIManager : MonoBehaviour
 {
@@ -14,21 +10,29 @@ public class UIManager : MonoBehaviour
     public GameObject anchoringUI;
     public GameObject selectionUI;
     public GameObject informationUI;
+    public GameObject statusUI;
+    public GameObject resultUI;
 
     [Header("Plant Selection Panel")]
-    public GameObject plantTooltip; // Tooltip for plant name
-    public TextMeshProUGUI tooltipText; // Tooltip text for plant name
+    public GameObject plantTooltip;
+    public TextMeshProUGUI tooltipText;
 
     [Header("Plant Information Panel")]
     public TextMeshProUGUI plantNameText;
     public TextMeshProUGUI scientificNameText;
     public TextMeshProUGUI familyText;
-    public GameObject[] conservationIcons; // Conservation status icons
-    [Range(20, 40)]
-    public int maxNameLength = 31; // Max length plant name -> New line if too long
+    public GameObject[] conservationIcons;
+    [Range(20, 40)] public int maxNameLength = 31;
+
+    [Header("Status Panel")]
+    public TextMeshProUGUI scoreText;
+    public TextMeshProUGUI timerText;
+
+    [Header("Result Panel")]
+    public TextMeshProUGUI resultText;
 
     private PlantController currentPlant;
-    
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -41,20 +45,20 @@ public class UIManager : MonoBehaviour
 
     private void Start()
     {
-        HideAllScreens(); // Hide all screens at the start
-        ShowTitleScreen(); // Show the title screen
+        HideAllScreens();
+        ShowTitleScreen();
     }
 
     // ======================== UI Screen Management ========================
-    public void ShowTitleScreen()       => ActivateOnly(titleUI);
-    public void ShowAnchoringScreen()   => ActivateOnly(anchoringUI);
-    public void ShowSelectionScreen()   => ActivateOnly(selectionUI);
+    public void ShowTitleScreen() => ActivateOnly(titleUI);
+    public void ShowAnchoringScreen() => ActivateOnly(anchoringUI);
+    public void ShowSelectionScreen() => ActivateOnly(selectionUI);
     public void ShowInformationScreen() => ActivateOnly(informationUI);
-
+    public void ShowResultScreen() => ActivateOnly(resultUI);
     private void ActivateOnly(GameObject screen)
     {
-        HideAllScreens(); // Hide all other screens
-        if (screen != null) screen.SetActive(true); // Activate the specified screen
+        HideAllScreens();
+        if (screen != null) screen.SetActive(true);
     }
 
     private void HideAllScreens()
@@ -63,12 +67,33 @@ public class UIManager : MonoBehaviour
         anchoringUI.SetActive(false);
         selectionUI.SetActive(false);
         informationUI.SetActive(false);
+        statusUI.SetActive(false);
+        resultUI.SetActive(false);
     }
-    
+    // ================== Status Panel Updates ==================
+    public void UpdateScore(int score, int maxPlants)
+    {
+        scoreText.text = $"{score}/{maxPlants}";
+    }
+    public void UpdateTimer(float sec)
+    {
+        int m = Mathf.FloorToInt(sec / 60f);
+        int s = Mathf.FloorToInt(sec % 60f);
+        timerText.text = $"{m:D2}:{s:D2}";
+    }
+    public void UpdateResult(int score, int maxPlants)
+    {
+        resultText.text = $"{score}/{maxPlants}";
+    }
     // ==================== Button Functions: UI Actions ====================
     public void AnimationButton(int actionIndex)
     {
         if (currentPlant != null) currentPlant.PlayAnimation(actionIndex);
+    }
+
+    public void SeasonButton(int actionIndex)
+    {
+        if (currentPlant != null) currentPlant.PlaySeasonEffect(actionIndex);
     }
 
     public void ReturnButton()
@@ -76,7 +101,7 @@ public class UIManager : MonoBehaviour
         if (currentPlant != null)
         {
             Debug.Log($"Current Plant: {currentPlant}");
-            currentPlant.OnDeselect(); // Deselect the current plant
+            currentPlant.OnDeselect();
             currentPlant = null;
         }
     }
@@ -85,7 +110,7 @@ public class UIManager : MonoBehaviour
     {
         currentPlant = plant;
         Debug.Log($"Current Plant: {currentPlant}");
-        plantTooltip.SetActive(true); // Show tooltip
+        plantTooltip.SetActive(true);
         tooltipText.text = data.thaiName;
     }
 
@@ -93,26 +118,39 @@ public class UIManager : MonoBehaviour
     public void ShowPlantInfo(PlantData data, PlantController plant)
     {
         currentPlant = plant;
-        plantTooltip.SetActive(false); // Hide tooltip
-
+        plantTooltip.SetActive(false);
         plantNameText.text = data.thaiName;
         scientificNameText.text = $"<i>{data.scientificName}</i>";
         familyText.text = data.family;
 
         // ================== Conservation Icons Management =================
         int statusIndex = (int)data.conservationStatus;
-        bool isNA = statusIndex == 0; // Check if status is Not Available (NA)
+        bool isNA = statusIndex == 0;
 
         for (int i = 0; i < conservationIcons.Length; i++)
         {
-            conservationIcons[i].SetActive(isNA ? i == 0 : i != 0); // Show only NA if status is NA, otherwise show all except NA
-            conservationIcons[i].transform.localScale = Vector3.one; // Reset all icons scale to 1*1*1
+            conservationIcons[i].SetActive(isNA ? i == 0 : i != 0);
+            conservationIcons[i].transform.localScale = Vector3.one;
         }
 
-        if (!isNA && statusIndex < conservationIcons.Length) // Scale up the matching icon
+        if (!isNA && statusIndex < conservationIcons.Length)
             conservationIcons[statusIndex].transform.localScale = Vector3.one * 1.5f;
         else if (!isNA)
             Debug.LogWarning($"[UIManager] Unknown conservation status: {data.conservationStatus}");
     }
     // ======================================================================
+
+    public void ShowPopup(string msg, System.Action onYes, System.Action onNo)
+    {
+        Debug.Log($"[UI Popup] {msg}  (auto YES for now)");
+
+        onYes?.Invoke();
+    }
+
+    public void ShowConfirm(string msg, System.Action onConfirm)
+    {
+        Debug.Log($"[UI Confirm] {msg}  (auto Confirm for now)");
+
+        onConfirm?.Invoke();
+    }
 }

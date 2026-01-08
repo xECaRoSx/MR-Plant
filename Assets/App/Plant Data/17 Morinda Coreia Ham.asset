@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 715aeb697637cee46af6ef11aded8ec1, type: 3}
+  m_Name: 17 Morinda Coreia Ham
+  m_EditorClassIdentifier: 
+  thaiName: "\u0E22\u0E2D\u0E1B\u0E48\u0E32"
+  scientificName: Morinda coreia Ham.
+  family: Rubiaceae
+  conservationStatus: 0
+  plantPrefab: {fileID: 0}
+  idleAnimation: {fileID: 7400000, guid: 9c257d9426dd8744791173ad113d29e7, type: 2}
+  animationList:
+  - {fileID: 7400000, guid: c3594363050b0e6469f90a467723c549, type: 2}
+  plantSound: {fileID: 8300000, guid: a418a2417f8aeb24cb71085138b29e22, type: 3}
+  plantInfoVO: {fileID: 8300000, guid: 21ce7fee4dd9ed545a4dfc7a9e616a68, type: 3}
+  alwaysSpawn: 1

@@ -39,7 +39,7 @@ public class VFXManager : MonoBehaviour
         {
             if (entry.trigger == triggerType)
                 ActivateVFX(entry);
-            Debug.Log($"[VFXManager] Play: {entry}");
+                Debug.Log($"[VFXManager] Play: {entry}");
         }
     }
 
@@ -70,7 +70,7 @@ public class VFXManager : MonoBehaviour
         var particle = entry.vfxObject.GetComponent<ParticleSystem>();
         if (particle != null)
         {
-            entry.vfxObject.SetActive(true);
+            entry.vfxObject.SetActive(true); 
             particle.Clear();
             particle.Play();
         }

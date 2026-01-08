@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 715aeb697637cee46af6ef11aded8ec1, type: 3}
+  m_Name: 20 Shorea obtusa Wall
+  m_EditorClassIdentifier: 
+  thaiName: "\u0E40\u0E15\u0E47\u0E07"
+  scientificName: Shorea obtusa Wall. ex Blume
+  family: Dipterocarpaceae
+  conservationStatus: 6
+  plantPrefab: {fileID: 0}
+  idleAnimation: {fileID: 7400000, guid: 9c257d9426dd8744791173ad113d29e7, type: 2}
+  animationList:
+  - {fileID: 7400000, guid: d2cc0550493c8f247a85d2d6f8f1849f, type: 2}
+  plantSound: {fileID: 8300000, guid: 3ba5c07b523252d48829ca7716532933, type: 3}
+  plantInfoVO: {fileID: 8300000, guid: 2dda7f708fffe0b428d15ff8d511ed84, type: 3}
+  alwaysSpawn: 1
